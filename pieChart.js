@@ -6,7 +6,7 @@ var dados = [['Work',     11],
 ]
 
 function strip(number) {
-    return (parseFloat(number.toPrecision(3)));
+    return (parseFloat(number.toPrecision(5)));
 }
 
 function pieChart(valores){
@@ -39,12 +39,12 @@ function pieChart(valores){
 
         chart.draw(data, options);
 
-      var counter = 0;
-
+      var counter = 0.2;
       var handler = setInterval(function(){
-          counter = 0.2;
+          console.log(counter);
           options = {
-            title: 'My Daily Activities'
+            title: 'My Daily Activities',
+            pieSliceText: 'none'
           };
           i = 0;
           while(i < valoresDados.length){
@@ -55,7 +55,16 @@ function pieChart(valores){
             ['Task', 'Hours per Day']].concat(valores));
           chart.draw(data, options);
 
-          if (valores[maior][1] >= valoresDados[maior]) clearInterval(handler);
+          if (valores[maior][1] >= valoresDados[maior]){
+            clearInterval(handler);
+            var opcions = {
+              title: 'My Daily Activities',
+              pieSliceText: 'percentage',
+            };
+            data = google.visualization.arrayToDataTable([
+              ['Task', 'Hours per Day']].concat(valores));
+            chart.draw(data, opcions);
+          }
       }, 30);
     }
 }
