@@ -41,10 +41,10 @@ function pieChart(valores){
 
       var counter = 0.2;
       var handler = setInterval(function(){
-          console.log(counter);
           options = {
             title: 'My Daily Activities',
-            pieSliceText: 'none'
+            pieSliceText: 'none',
+            legend: 'none'
           };
           i = 0;
           while(i < valoresDados.length){
